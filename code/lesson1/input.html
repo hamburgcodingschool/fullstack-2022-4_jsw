@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <ol>
+      <li>Prompt the User for a Todo and print it to the console</li>
+    </ol>
+    <button id="add-todo">Add Todo</button>
+    <ul id="todos"></ul>
+  </body>
+  <script type="text/javascript">
+    let button = document.getElementById("add-todo");
+    button.addEventListener("click", function clickHandler(event) {
+      let result = prompt("New Todo");
+      console.log(result);
+      // 1. ask user for todo with prompt()
+      // 2. print todo to console using console.log()
+    });
+  </script>
+</html>

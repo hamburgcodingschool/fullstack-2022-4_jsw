@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <ol>
+      <li>Prompt the User for a Todo and print it to the console</li>
+    </ol>
+    <button id="add-todo">Add Todo</button>
+    <ul id="todos"></ul>
+  </body>
+  <script type="text/javascript">
+    function clickHandler(event) {
+      console.log(event);
+      let list = document.getElementById("todos");
+      let todo = prompt("What ToDo do you have?");
+      console.log(todo);
+      let listItem = document.createElement("li");
+      // Do your thing here:
+      //listItem.style.backgroundColor = "#777";
+      let itemText = document.createTextNode(todo);
+      listItem.appendChild(itemText);
+      list.appendChild(listItem);
+    }
+    let button = document.getElementById("add-todo");
+    button.addEventListener("click", clickHandler);
+  </script>
+</html>

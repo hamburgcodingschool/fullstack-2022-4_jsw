@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Double Counter - Here's one I made earlier</title>
+  </head>
+  <body>
+    <div>
+      <label
+        ><input
+          type="radio"
+          name="counter-selector"
+          checked
+          id="counter-selector-a"
+        />Counter A: <span id="counter-a">0</span></label
+      >
+    </div>
+    <div>
+      <label
+        ><input
+          type="radio"
+          name="counter-selector"
+          id="counter-selector-b"
+        />Counter B: <span id="counter-b">0</span></label
+      >
+    </div>
+    <div>
+      <button id="count-up">+</button>
+      <button id="count-down">-</button>
+    </div>
+    <script>
+      /**
+       * This is my example implementation of the two counter challenge
+       * */
+      let counter1 = 0;
+      let counter2 = 0;
+      const radioButton1 = document.getElementById("counter-selector-a");
+      const radioButton2 = document.getElementById("counter-selector-b");
+      const buttonUp = document.getElementById("count-up");
+      const buttonDown = document.getElementById("count-down");
+      const counter1Element = document.getElementById("counter-a");
+      const counter2Element = document.getElementById("counter-b");
+
+      function countUp() {
+        if (radioButton1.checked) {
+          counter1 += 1;
+        } else {
+          counter2 += 1;
+        }
+        refreshCounters();
+      }
+
+      function countDown() {
+        if (radioButton1.checked) {
+          counter1 -= 1;
+        } else {
+          counter2 -= 1;
+        }
+        refreshCounters();
+      }
+      function refreshCounters() {
+        counter1Element.innerText = counter1.toString(10);
+        counter2Element.innerText = counter2.toString(10);
+      }
+
+      buttonUp.addEventListener("click", countUp);
+      buttonDown.addEventListener("click", countDown);
+
+      document.addEventListener("keypress", function (event) {
+        console.log(event);
+        if (event.key === "+") {
+          countUp();
+        }
+        if (event.key === "-") {
+          countDown();
+        }
+        if (event.key === "a") {
+          radioButton1.checked = true;
+        }
+        if (event.key === "b") {
+          radioButton2.checked = true;
+        }
+      });
+    </script>
+  </body>
+</html>

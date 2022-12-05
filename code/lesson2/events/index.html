@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #button {
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: 10px;
+        transition: background-color 0.2s ease-in;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="button">Color me</button>
+    <script>
+      /* Example for the simple button clicker */
+      let button = document.getElementById("button");
+      let colors = ["red", "green", "blue", "yellow", "magenta"];
+      let counter = 0;
+      button.addEventListener("click", function () {
+        console.log("clicked the button");
+        counter = (counter + 1) % colors.length;
+        button.style.backgroundColor = colors[counter];
+      });
+      button.style.backgroundColor = colors[0];
+    </script>
+  </body>
+</html>

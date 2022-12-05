@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <button id="button">Click Me!</button>
+    <script>
+      const button = document.getElementById("button");
+
+      const colors = ["red", "green", "yellow"];
+      const rect = button.getBoundingClientRect();
+
+      /**
+       * This is a stupid example on how you could color the button by
+       * looking at the coordinate the user clicked
+       * To get the width of the button, I used button.getBoundingClientRect() and
+       * the object returned contains a width property.
+       *
+       * I then divide the mouse position (clientX gives me the mouse position within the click target)
+       * by the width to give me a number roughly from 0 to 1 and multiply that by 360 to get an angle.
+       **/
+
+      let eventHandler = function (event) {
+        const x = event.clientX;
+        const hue = (x / rect.width) * 360.0;
+        button.style.backgroundColor = `hsl(${hue}deg, 100%, 50%)`;
+      };
+      button.addEventListener("click", eventHandler);
+    </script>
+  </body>
+</html>

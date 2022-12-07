@@ -15,6 +15,10 @@
         padding: 20px;
         font-size: 20px;
       }
+      button:hover {
+        background-color: blue;
+        color: #fff;
+      }
       .number {
         box-sizing: border-box;
         width: 400px;
@@ -24,7 +28,13 @@
   </head>
   <body>
     <div>
-      <input id="number" type="tel" class="number" maxlength="5" />
+      <input
+        data-number-input
+        id="number"
+        type="tel"
+        class="number"
+        maxlength="5"
+      />
     </div>
     <div class="numpad">
       <button data-num="1">1</button>
@@ -40,6 +50,15 @@
       <button data-num="0">0</button>
       <button data-num="#">#</button>
     </div>
-    <script></script>
+    <script src="dialtones.js"></script>
+    <script>
+      const input = document.querySelector("[data-number-input]");
+      document.querySelectorAll("[data-num]").forEach((element) => {
+        element.addEventListener("click", (event) => {
+          input.value += event.target.getAttribute("data-num");
+          dialtone(event.target.getAttribute("data-num"));
+        });
+      });
+    </script>
   </body>
 </html>

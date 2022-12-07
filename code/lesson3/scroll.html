@@ -26,6 +26,7 @@
         const element = document.getElementById("element");
 
         const scrollPos = window.scrollY;
+        element.style.transform = `rotate(${scrollPos / 2}deg)`;
         element.style.left = `${scrollPos / 2}px`;
       });
     </script>

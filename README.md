@@ -6,11 +6,13 @@
 
 - [Lesson 1](/homework/lesson_1.md)
 - [Lesson 2](/homework/lesson_2.md)
+- [Lesson 3](/homework/lesson_3.md)
 
 ### 📄 Docs
 
 - [Lesson 1 Concepts](/docs/lesson_1.md)
 - [Lesson 2 Concepts](/docs/lesson_2.md)
+- [Lesson 3 Concepts](/docs/lesson_3.md)
 
 ### 🤔 Questions?
 

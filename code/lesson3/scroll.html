@@ -15,6 +15,7 @@
         height: 100px;
         background-color: red;
         opacity: 0.5;
+        border-radius: 30px;
       }
       p {
         max-width: 600px;
@@ -28,6 +29,7 @@
         const scrollPos = window.scrollY;
         element.style.transform = `rotate(${scrollPos / 2}deg)`;
         element.style.left = `${scrollPos / 2}px`;
+        element.style.backgroundColor = `hsl(${scrollPos / 2}deg, 100%, 50%)`;
       });
     </script>
   </head>

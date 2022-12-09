@@ -26,3 +26,4 @@ We're going to focus on _1_ round of playing this time, rest will come later.
    - a yellow for correct digit
    - a dark grey ('grey' is good enough) for a wrong digit.
    - To get a specific button by number, you can use `querySelector` and a slighty more complex query than the one we've used before: By querying for `[data-num="2"]` you're selecting the button with the 2. So with string interpolation, you should be able to construct a query for a specific button.
+

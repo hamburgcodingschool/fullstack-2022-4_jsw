@@ -14,10 +14,7 @@
       button {
         padding: 20px;
         font-size: 20px;
-      }
-      button:hover {
-        background-color: blue;
-        color: #fff;
+        background: grey;
       }
       .number {
         box-sizing: border-box;
@@ -52,11 +49,55 @@
     </div>
     <script src="dialtones.js"></script>
     <script>
+      const number = [0, 1, 2, 3, 4];
+      let inputNumber = [];
       const input = document.querySelector("[data-number-input]");
+
+      function checkInput() {
+        const result = { correctPosition: [], correctNumber: [] };
+        inputNumber.forEach((num, i) => {
+          const index = number.indexOf(num);
+          if (index === -1) {
+            return;
+          }
+          if (index === i) {
+            result.correctPosition.push(num);
+          } else {
+            result.correctNumber.push(num);
+          }
+        });
+        return result;
+      }
+      function colorNumbers(result) {
+        document
+          .querySelectorAll("[data-num]")
+          .forEach((e) => (e.style.backgroundColor = "grey"));
+        result.correctPosition.forEach((num) => {
+          console.log(num);
+          document.querySelector(`[data-num="${num}"]`).style.backgroundColor =
+            "green";
+        });
+        result.correctNumber.forEach((num) => {
+          console.log(num);
+          document.querySelector(`[data-num="${num}"]`).style.backgroundColor =
+            "yellow";
+        });
+      }
+
       document.querySelectorAll("[data-num]").forEach((element) => {
         element.addEventListener("click", (event) => {
-          input.value += event.target.getAttribute("data-num");
-          dialtone(event.target.getAttribute("data-num"));
+          const num = Number(event.target.getAttribute("data-num"));
+          input.value += num;
+          inputNumber.push(num);
+          if (inputNumber.length === 5) {
+            console.log(inputNumber.join(","));
+            const result = checkInput();
+            colorNumbers(result);
+            input.value = "";
+            inputNumber = [];
+          }
+
+          //dialtone(num);
         });
       });
     </script>

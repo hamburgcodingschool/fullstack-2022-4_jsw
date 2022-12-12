@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Numble</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      .numpad {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        width: 400px;
+        margin: 0 auto;
+      }
+      button {
+        padding: 10px;
+        font-size: 30px;
+        margin: 5px;
+      }
+      .number {
+        box-sizing: border-box;
+        width: 400px;
+        font-size: 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        width: 240px;
+        grid-gap: 10px;
+        margin: 0 auto 20px auto;
+      }
+      .grid-item {
+        text-align: center;
+        line-height: 40px;
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+        background-color: #eee;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Numble</h1>
+    <div class="grid">
+      <div data-row="0" data-column="0" class="grid-item"></div>
+      <div data-row="0" data-column="1" class="grid-item"></div>
+      <div data-row="0" data-column="2" class="grid-item"></div>
+      <div data-row="0" data-column="3" class="grid-item"></div>
+      <div data-row="0" data-column="4" class="grid-item"></div>
+
+      <div data-row="1" data-column="0" class="grid-item"></div>
+      <div data-row="1" data-column="1" class="grid-item"></div>
+      <div data-row="1" data-column="2" class="grid-item"></div>
+      <div data-row="1" data-column="3" class="grid-item"></div>
+      <div data-row="1" data-column="4" class="grid-item"></div>
+
+      <div data-row="2" data-column="0" class="grid-item"></div>
+      <div data-row="2" data-column="1" class="grid-item"></div>
+      <div data-row="2" data-column="2" class="grid-item"></div>
+      <div data-row="2" data-column="3" class="grid-item"></div>
+      <div data-row="2" data-column="4" class="grid-item"></div>
+
+      <div data-row="3" data-column="0" class="grid-item"></div>
+      <div data-row="3" data-column="1" class="grid-item"></div>
+      <div data-row="3" data-column="2" class="grid-item"></div>
+      <div data-row="3" data-column="3" class="grid-item"></div>
+      <div data-row="3" data-column="4" class="grid-item"></div>
+
+      <div data-row="4" data-column="0" class="grid-item"></div>
+      <div data-row="4" data-column="1" class="grid-item"></div>
+      <div data-row="4" data-column="2" class="grid-item"></div>
+      <div data-row="4" data-column="3" class="grid-item"></div>
+      <div data-row="4" data-column="4" class="grid-item"></div>
+    </div>
+    <div class="numpad">
+      <button data-num="1">1</button>
+      <button data-num="2">2</button>
+      <button data-num="3">3</button>
+      <button data-num="4">4</button>
+      <button data-num="5">5</button>
+      <button data-num="6">6</button>
+    </div>
+    <script>
+      const solution = [4, 1, 3, 4, 5];
+      const inputNumber = [];
+      const round = 0;
+      function clickHandler(event) {
+        let number = Number(event.target.dataset.num);
+        inputNumber.push(number);
+        const column = inputNumber.length - 1;
+
+        const gridItem = document.querySelector(
+          `[data-row="${round}"][data-column="${column}"]`
+        );
+
+        gridItem.innerText = number;
+
+        console.log(number);
+
+        if (inputNumber.length === 5) {
+          console.log("result", checkInput());
+
+          console.log(inputNumber);
+        }
+      }
+
+      document.querySelectorAll("[data-num]").forEach((element) => {
+        element.addEventListener("click", clickHandler);
+      });
+
+      function count(array, element) {
+        let count = 0;
+        for (let i = 0, l = array.length; i < l; i++) {
+          if (array[i] === element) {
+            count++;
+          }
+        }
+        return count;
+      }
+
+      function countError(res, input, error, num) {
+        let count = 0;
+        for (let i = 0, l = res.length; i < l; i++) {
+          if (res[i] === error && input[i] === num) {
+            count++;
+          }
+        }
+        return count;
+      }
+
+      function removeDuplicates(result, solution, inputNumber) {
+        for (i = 0, l = result.length; i < l; i++) {
+          if (result[i] === "C") {
+            const num = inputNumber[i];
+            const correctCount = count(solution, num);
+            const correctPosCount = countError(result, inputNumber, "P", num);
+            const wrongPosCount = countError(result, inputNumber, "C", num);
+            const difference = correctPosCount + wrongPosCount - correctCount;
+            console.log(i, difference);
+            let cCount = wrongPositionCount - difference;
+            console.log(cCount);
+            for (let j = 0; j < l; j++) {
+              console.log(result[j]);
+              if (result[j] === "C" && inputNumber[j] === num) {
+                if (cCount > 0) {
+                  cCount--;
+                } else {
+                  result[j] = "W";
+                }
+              }
+            }
+          }
+        }
+        return result;
+      }
+
+      function checkInput() {
+        let result = [];
+        for (let i = 0; i < solution.length; i++) {
+          if (solution[i] === inputNumber[i]) {
+            result[i] = "P";
+          } else if (solution.includes(inputNumber[i])) {
+            result[i] = "C";
+          } else {
+            result[i] = "W";
+          }
+        }
+        result = removeDuplicates(result, solution, inputNumber);
+        return result;
+      }
+    </script>
+  </body>
+</html>

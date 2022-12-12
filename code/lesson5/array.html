@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array stuff</title>
+  </head>
+  <body>
+    <script>
+      array = [
+        75, 54, 76, 44, 8, 17, 6, 23, 56, 83, 53, 27, 75, 2, 33, 85, 11, 51, 8,
+        37, 77, 50, 52, 74, 51, 63, 22, 31, 41, 15, 8, 9, 42, 42, 3, 8, 38, 91,
+        9, 9, 2, 37, 59, 9, 14, 25, 64, 23, 32, 88, 74, 20, 14, 85, 83, 76, 64,
+        95, 61, 58, 22, 87, 81, 5, 48, 35, 66, 89, 14, 75, 71, 86, 42, 88, 96,
+        77, 51, 10, 21, 2, 90, 49, 33, 95, 7, 55, 71, 82, 50, 12, 28, 56, 84,
+        32, 91, 6, 35, 85, 56, 74,
+      ];
+      array.sort((a, b) => a - b); // sort the array
+      array.map((number) => number * 3); // multiply all elements by 3
+      array.filter((number) => number < 10); // only the elements smaller than 10
+      array.reduce((memo, number) => memo + number, 0); // sum of all elements
+
+      // ternary
+      // condition ? if : else
+      let count = {};
+      array.forEach((element) => {
+        if (count[element] == null) {
+          count[element] = 0;
+        }
+        count[element] += 1;
+      });
+
+      let obj = {};
+
+      obj.firstKey = "hello";
+      console.log(obj);
+
+      console.log(Object.keys(count).filter((key) => count[key] > 1));
+
+      document.write("<code>" + array.toString() + "</code>");
+      document.write("<br>");
+
+      // find the maximum value in the array
+      // filter for the odd numbers
+      // filter for all numbers divisible by 3
+      // return the modulo % 3 for all numbers
+      // sort the numbers in ascending and descending order
+      // what is the sum of all the odd numbers?
+      // what is the biggest even number?
+      // are there any duplicates? if so, what are they?
+    </script>
+  </body>
+</html>

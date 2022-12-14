@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "name": "Jan Krutisch",
+    "occupation": "Computer Greybeard",
+    "birthyear": 1976,
+    "birthplace": "Hamburg, Germany",
+    "bicycles": 3,
+    "favoriteColor": "orange",
+    "favoriteAnimal": "common swift",
+    "favouriteGif": "gifs/elmo.gif",
+    "github": "https://github.com/halfbyte"
+  },
+  {
+    "id": 2,
+    "name": "Sebastian Liebentraut",
+    "occupation": "educator",
+    "birthyear": 1989,
+    "birthplace": "Hamburg, Germany",
+    "bicycles": 2,
+    "favoriteColor": "blue, green",
+    "favoriteAnimal": "chameleon",
+    "favouriteGif": "gifs/elmo.gif",
+    "github": "https://github.com/sbstn98"
+  },
+  {
+    "id": 3,
+    "name": "Oliver Haupt",
+    "occupation": "Theologian",
+    "birthyear": 1980,
+    "birthplace": "Hamburg, Germany",
+    "bicycles": 0,
+    "favoriteColor": "blue",
+    "favoriteAnimal": "cat",
+    "favouriteGif": "",
+    "github": ""
+  },
+  {
+    "id": 4,
+    "name": "Samuel Adu Asare",
+    "occupation": "Accountant",
+    "birthyear": 1988,
+    "birthplace": "kumasi, Ghana",
+    "bicycles": 0,
+    "favoriteColor": "white",
+    "favoriteAnimal": "0",
+    "favouriteGif": "0",
+    "github": "0"
+  },
+  {
+    "id": 5,
+    "name": "Hugo Sanchez",
+    "occupation": "Musician",
+    "birthyear": 1970,
+    "birthplace": "Caracas, Venezuela",
+    "bicycles": 1,
+    "favoriteColor": "blue",
+    "favoriteAnimal": "dogs",
+    "favouriteGif": "",
+    "github": ""
+  },
+  {
+    "id": 6,
+    "name": "Lily Walch",
+    "occupation": "Old knitting lady",
+    "birthyear": 2001,
+    "birthplace": "Salzburg, Austria",
+    "bicycles": 0,
+    "favoriteColor": "purple",
+    "favoriteAnimal": "elephant",
+    "favouriteGif": "https://giphy.com/gifs/angry-mad-anger-l1J9u3TZfpmeDLkD6",
+    "github": "https://github.com/lilywalch"
+  },
+  {
+    "id": 7,
+    "name": "Vassilis Vritkas",
+    "occupation": "Showman",
+    "birthyear": 1995,
+    "birthplace": "Kaltenkirchen, Germany",
+    "bicycles": 2,
+    "favoriteColor": "blue",
+    "favoriteAnimal": "bear",
+    "github": "https://github.com/vvritkas"
+  }
+]

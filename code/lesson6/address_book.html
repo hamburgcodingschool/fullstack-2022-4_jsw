@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Book</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .details-list dt {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Course Address Book</h1>
+    <input id="search" placeholder="Search" />
+    <h2>Todos</h2>
+    <li>
+      Either copy this code or mix it with your own to
+      <ul>
+        <li>Have a link for each person that is clickable</li>
+        <li>
+          When the link is clicked, display details in another place, like the
+          "details" div this version has
+        </li>
+      </ul>
+    </li>
+    <hr />
+    <ul id="addressbook"></ul>
+    <div id="details"></div>
+    <script>
+      let personsCache = [];
+
+      function h(tagName, attributes = {}, ...children) {
+        // create the tag
+        const tag = document.createElement(tagName);
+        // assign attributes if given
+        Object.keys(attributes).forEach((k) => {
+          tag.setAttribute(k, attributes[k]);
+        });
+        // the rest of the parameters are "children". These
+        // can be either further tags (created by more h()'s')
+        // or just text which is added as text nodes
+        children.forEach((child) => {
+          if (typeof child === "string") {
+            tag.appendChild(document.createTextNode(child));
+          } else {
+            tag.appendChild(child);
+          }
+        });
+        return tag;
+      }
+
+      function showDetails(event) {
+        if (event.target.dataset.id != null) {
+          console.log(event.target.dataset.id);
+          const id = event.target.dataset.id;
+          console.log(personsCache);
+          if (personsCache.length > 0) {
+            let person = personsCache.find(
+              (person) => person.id === Number(id)
+            );
+            if (person) {
+              const detailsDiv = document.getElementById("details");
+              const age = new Date().getFullYear() - person.birthyear;
+              detailsDiv.innerHTML = "";
+              detailsDiv.appendChild(
+                h(
+                  "div",
+                  {},
+                  h(
+                    "dl",
+                    { class: "details-list" },
+                    h("dt", {}, "Name"),
+                    h("dd", {}, person.name),
+                    h("dt", {}, "Occupation"),
+                    h("dd", {}, person.occupation),
+                    h("dt", {}, "Age"),
+                    h("dd", {}, `${age} years`)
+                  ),
+                  h(
+                    "p",
+                    {},
+                    "You can find their GitHub repo at ",
+                    h("a", { href: person.github }, person.github)
+                  )
+                )
+              );
+            }
+          }
+        }
+      }
+
+      function displayPersons(persons) {
+        // This looks confusing? Trust me.
+        // This is for Exercise 2.
+        if (persons) {
+          personsCache = persons;
+        } else {
+          persons = personsCache;
+        }
+
+        const ul = document.getElementById("addressbook");
+        persons.forEach((person) => {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = `#${person.id}`;
+          link.innerText = person.name;
+          link.dataset.id = person.id;
+          li.appendChild(link);
+
+          ul.appendChild(li);
+        });
+        ul.addEventListener("click", showDetails);
+      }
+      fetch("data.json")
+        .then((response) => response.json())
+        .then(displayPersons);
+    </script>
+  </body>
+</html>

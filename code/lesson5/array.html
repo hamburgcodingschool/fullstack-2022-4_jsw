@@ -31,10 +31,11 @@
         count[element] += 1;
       });
 
-      let obj = {};
-
-      obj.firstKey = "hello";
-      console.log(obj);
+      let user = {
+        name: "Jan",
+        birthYear: 1976,
+      };
+      user.eyeColor = "who knows";
 
       console.log(Object.keys(count).filter((key) => count[key] > 1));
 

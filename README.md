@@ -10,6 +10,7 @@
 - [Lesson 4](/homework/lesson_4.md)
 - [Lesson 5](/homework/lesson_5.md)
 - ~~Lesson 6~~
+- [Lesson 7](/homework/lesson_7.md)
 
 ### 📄 Docs
 
@@ -19,6 +20,7 @@
 - [Lesson 4 Concepts](/docs/lesson_4.md)
 - [Lesson 5 Concepts](/docs/lesson_5.md)
 - [Lesson 6 Concepts](/docs/lesson_6.md)
+- [Lesson 7 Concepts](/docs/lesson_7.md)
 
 ### 🤔 Questions?
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Pokemon</h1>
+    <ul id="pokemon-list"></ul>
+    <script>
+      function h(tagName, attributes = {}, ...children) {
+        // create the tag
+        const tag = document.createElement(tagName);
+        // assign attributes if given
+        Object.keys(attributes).forEach((k) => {
+          tag.setAttribute(k, attributes[k]);
+        });
+        // the rest of the parameters are "children". These
+        // can be either further tags (created by more h()'s')
+        // or just text which is added as text nodes
+        children.forEach((child) => {
+          if (typeof child === "string") {
+            tag.appendChild(document.createTextNode(child));
+          } else {
+            tag.appendChild(child);
+          }
+        });
+        return tag;
+      }
+
+      const list = document.getElementById("pokemon-list");
+      fetch("https://pokeapi.co/api/v2/pokemon")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          const pokemons = data.results;
+          console.log(pokemons);
+          pokemons.forEach((pokemon) => {
+            list.appendChild(
+              h(
+                "li",
+                {},
+                h(
+                  "a",
+                  {
+                    href: `#${pokemon.name}`,
+                    "data-details-url": pokemon.url,
+                  },
+                  pokemon.name
+                )
+              )
+            );
+          });
+        });
+    </script>
+    <div id="pokemon-details"></div>
+  </body>
+</html>

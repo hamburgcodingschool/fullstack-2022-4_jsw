@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes</title>
+  </head>
+  <body>
+    <div class="form-wrapper">
+      <p><input type="text" id="title" placeholder="Title" /></p>
+      <p>
+        <textarea rows="5" cols="80" id="note" placeholder="Note"></textarea>
+      </p>
+      <button id="add-note-button">Add Note</button>
+    </div>
+    <div id="notes"></div>
+    <script>
+      // load data from localstorage
+      // display data from localstorage
+
+      function renderNotes(notes) {}
+      function addNote() {
+        const title = document.getElementById("title").value;
+        const note = document.getElementById("note").value;
+        // add note to data
+        // write data to localstorage
+        // re-display data
+      }
+      const button = document.getElementById("add-note-button");
+      button.addEventListener("click", addNote);
+    </script>
+  </body>
+</html>

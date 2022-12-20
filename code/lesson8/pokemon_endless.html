@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: antiquewhite;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      #mainWrapper {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      h1 {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+      }
+
+      #pokemon-list {
+        width: 40%;
+      }
+
+      #pokemon-details {
+        width: 60%;
+        height: 200px;
+        border: solid 2px;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: lightblue;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      #pokemon-Image {
+        max-width: 200px;
+        max-height: 200px;
+      }
+      #show-more {
+        padding: 15px;
+        margin: 15px;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Pokemon</h1>
+    <div id="mainWrapper">
+      <div>
+        <ul id="pokemon-list"></ul>
+        <button id="show-more" data-something-else="hello">
+          show more pokemon
+        </button>
+      </div>
+      <div id="pokemon-details">
+        <div id="details-text"></div>
+        <div id="pokemon-Image">
+          <img id="pokemon-img" src="" alt="" />
+        </div>
+      </div>
+    </div>
+    <script>
+      function h(tagName, attributes = {}, ...children) {
+        // create the tag
+        const tag = document.createElement(tagName);
+        // assign attributes if given
+        Object.keys(attributes).forEach((k) => {
+          tag.setAttribute(k, attributes[k]);
+        });
+        // the rest of the parameters are "children". These
+        // can be either further tags (created by more h()'s')
+        // or just text which is added as text nodes
+        children.forEach((child) => {
+          if (typeof child === "string") {
+            tag.appendChild(document.createTextNode(child));
+          } else {
+            tag.appendChild(child);
+          }
+        });
+        return tag;
+      }
+
+      const showMoreButton = document.getElementById("show-more");
+      const list = document.getElementById("pokemon-list");
+      list.addEventListener("click", detailsCreate);
+
+      fetch("https://pokeapi.co/api/v2/pokemon")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          const nextLink = data.next;
+          console.log(nextLink);
+          showMoreButton.setAttribute("data-next-link", nextLink);
+          showMoreButton.dataset.nextLink = nextLink;
+          console.log(showMoreButton.dataset);
+          const pokemons = data.results;
+          console.log(pokemons);
+          pokemons.forEach((pokemon) => {
+            list.appendChild(
+              h(
+                "li",
+                {},
+                h(
+                  "a",
+                  {
+                    href: `#${pokemon.name}`,
+                    "data-details-url": pokemon.url,
+                  },
+                  pokemon.name
+                )
+              )
+            );
+          });
+        });
+
+      function detailsCreate(event) {
+        let pokemonDetails = document.getElementById("pokemon-details");
+        console.log(event.target.dataset.detailsUrl);
+        fetch(event.target.dataset.detailsUrl)
+          .then((response) => {
+            return response.json();
+          })
+          .then((details) => {
+            console.log(details);
+            const name = details.name;
+            const weight = details.weight;
+            const image = details.sprites.front_default;
+            console.log(`name: ${name}`);
+            console.log(`weight: ${weight}`);
+            console.log(`image: ${image}`);
+
+            let text = document.createTextNode(
+              `The pokemon ${name} has a weight of ${weight}.`
+            );
+            const detailsText = document.getElementById("details-text");
+            pokemonDetails.replaceChild(text, pokemonDetails.childNodes[0]);
+            const pokemonImage = document.getElementById("pokemon-Image");
+            let img = document.createElement("img");
+            img.src = image;
+            pokemonImage.replaceChild(img, pokemonImage.childNodes[0]);
+          });
+      }
+
+      showMoreButton.addEventListener("click", ShowMore);
+      let showMoreCounter = 1;
+      function ShowMore() {
+        const nextLink = showMoreButton.dataset.nextLink;
+        console.log(nextLink);
+        showMoreCounter++;
+        fetch(nextLink)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const nextLink = data.next;
+            showMoreButton.dataset.nextLink = nextLink;
+            const pokemons = data.results;
+            console.log(pokemons);
+            pokemons.forEach((pokemon) => {
+              list.appendChild(
+                h(
+                  "li",
+                  {},
+                  h(
+                    "a",
+                    {
+                      href: `#${pokemon.name}`,
+                      "data-details-url": pokemon.url,
+                    },
+                    pokemon.name
+                  )
+                )
+              );
+            });
+          });
+      }
+    </script>
+  </body>
+</html>
